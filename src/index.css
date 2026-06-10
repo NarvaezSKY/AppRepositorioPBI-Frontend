@@ -1,0 +1,84 @@
+@import "@heroui/react/styles";
+
+/* ============================================================
+   SENA institutional theme overrides (HeroUI v3)
+   Primary brand: SENA green #39A900
+   ============================================================ */
+
+@theme {
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+@layer base {
+  /* Light theme — accent drives primary buttons, links, focus */
+  :root,
+  .light,
+  [data-theme="light"] {
+    --background: oklch(0.985 0.002 145);
+    --foreground: oklch(0.21 0.02 240);
+
+    --surface: oklch(1 0 0);
+    --surface-foreground: var(--foreground);
+
+    /* SENA green */
+    --accent: oklch(0.62 0.18 142);
+    --accent-foreground: oklch(0.99 0 0);
+
+    --success: oklch(0.62 0.18 142);
+    --success-foreground: oklch(0.99 0 0);
+
+    --focus: var(--accent);
+    --ring: var(--accent);
+  }
+
+  /* Dark theme */
+  .dark,
+  [data-theme="dark"] {
+    --background: oklch(0.18 0.012 240);
+    --foreground: oklch(0.96 0.004 145);
+
+    --surface: oklch(0.23 0.015 240);
+    --surface-foreground: var(--foreground);
+
+    --surface-secondary: oklch(0.27 0.015 240);
+    --surface-tertiary: oklch(0.31 0.015 240);
+
+    --overlay: oklch(0.23 0.015 240);
+    --overlay-foreground: var(--foreground);
+
+    /* slightly brighter SENA green for contrast on dark */
+    --accent: oklch(0.68 0.19 142);
+    --accent-foreground: oklch(0.16 0.02 240);
+
+    --success: oklch(0.68 0.19 142);
+    --success-foreground: oklch(0.16 0.02 240);
+
+    --border: oklch(0.32 0.012 240);
+    --separator: oklch(0.3 0.012 240);
+    --focus: var(--accent);
+  }
+}
+
+/* SENA brand custom tokens (used for accents in custom markup) */
+:root {
+  --sena-green: #39a900;
+  --sena-green-dark: #2e7d00;
+  --sena-blue: #00304d;
+  --sena-violet: #71277a;
+  --sena-cyan: #50e5f9;
+  --sena-yellow: #fdc300;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--background);
+  color: var(--foreground);
+}
