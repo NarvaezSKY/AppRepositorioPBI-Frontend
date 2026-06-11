@@ -4,11 +4,13 @@ import { Button, Input, InputGroup, Label, TextField } from "@heroui/react";
 import { Eye, EyeOff, Loader2, LockKeyhole, Moon, Sun } from "lucide-react";
 import { useAuth } from "../context/auth-context";
 import { useTheme } from "../context/theme-context";
+import SENABANNER from "@/assets/login-image.png";
+import SENALOGO from "@/assets/logo-sena.png";
+import CMRLOGO from "@/assets/logo-coord-mis-reg-white.png";
 
-const SENA_LOGO =
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aJxVhrHTI2U1uNVhSPTKiyrJXAFv0S.png";
-const SENA_BANNER =
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-3VShLl5SloUX3K41VCIXum8HDHRu1F.png";
+const SENA_LOGO = SENALOGO;
+const SENA_BANNER = SENABANNER;
+const CMR_LOGO = CMRLOGO;
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -49,8 +51,8 @@ export function LoginPage() {
         />
         <div className="absolute inset-0 bg-[var(--sena-blue)]/55" />
         <div className="relative z-10 flex flex-col justify-between p-12">
-          <div className="flex items-center gap-3">
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/95 shadow-lg">
+          <div className="flex items-center gap-3 backdrop-blur-sm backdrop-saturate-200 rounded-lg bg-white/30 px-3 py-2 w-md">
+            <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white/95 shadow-lg">
               <img
                 src={SENA_LOGO}
                 alt="Logo SENA"
@@ -60,12 +62,12 @@ export function LoginPage() {
             <div className="text-white">
               <p className="text-lg font-extrabold tracking-tight">SENA</p>
               <p className="text-sm text-white/80">
-                Servicio Nacional de Aprendizaje
+                Regional Cauca
               </p>
             </div>
           </div>
 
-          <div className="max-w-md text-white">
+          <div className="max-w-md text-white backdrop-blur-sm backdrop-saturate-200  rounded-lg bg-white/30 p-6">
             <h1 className="text-balance text-4xl font-extrabold leading-tight">
               Plataforma de Reportes Power BI
             </h1>
@@ -74,10 +76,18 @@ export function LoginPage() {
               lugar, organizados por módulos de gestión.
             </p>
           </div>
-
-          <p className="relative z-10 text-xs text-white/70">
-            Acceso exclusivo para funcionarios autorizados.
-          </p>
+          <div className="max-w-md text-white backdrop-blur-sm backdrop-saturate-200 rounded-lg bg-white/30 p-4 flex flex-row justify-between items-center">
+            <div className="flex items-center bg-white rounded-lg px-3 py-2 gap-2">
+              <img
+                src={CMR_LOGO}
+                alt="Logo CMR"
+                className="h-18 object-contain"
+              />
+            </div>
+            <p className="relative z-10 text-xs text-white/70">
+              Acceso exclusivo para funcionarios autorizados.
+            </p>
+          </div>
         </div>
       </aside>
 
@@ -140,7 +150,7 @@ export function LoginPage() {
                   Correo institucional
                 </Label>
                 <Input
-                  placeholder="nombre.apellido@sena.edu.co"
+                  placeholder="ejem.plo@sena.edu.co"
                   autoComplete="email"
                 />
               </TextField>
@@ -207,7 +217,7 @@ export function LoginPage() {
             </form>
 
             <p className="mt-8 text-center text-xs text-muted">
-              Servicio Nacional de Aprendizaje · SENA
+              Coordinación Misional Regional · SENA Regional Cauca
             </p>
           </div>
         </div>

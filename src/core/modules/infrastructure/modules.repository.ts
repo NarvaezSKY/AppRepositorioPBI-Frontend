@@ -12,7 +12,7 @@ const getModuleById: IModulesRepository["getModuleById"] = async (id) => {
 }
 
 const uploadModule: IModulesRepository["uploadModule"] = async (data) => {
-  const response = await axiosInstance.post("/modules", data)
+  const response = await axiosInstance.post("/modules/create", data)
   return response.data
 }
 

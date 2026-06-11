@@ -87,7 +87,7 @@ export function AppLayout() {
 
       <footer className="border-t border-border bg-surface/60">
         <div className="mx-auto w-full max-w-6xl px-4 py-4 text-center text-xs text-muted sm:px-6">
-          Servicio Nacional de Aprendizaje · SENA · Regional Cauca
+          Coordinación Misional Regional · SENA · Regional Cauca
         </div>
       </footer>
     </div>

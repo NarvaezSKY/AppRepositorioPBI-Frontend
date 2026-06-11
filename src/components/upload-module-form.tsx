@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useCatalogStore } from "@/store/catalog-store"
 import type { IPostModuleReq } from "@/core/modules/domain/upload-modules"
-
-const ROLE_OPTIONS = ["admin", "viewer", "editor"] as const
+import { ROLE_OPTIONS } from "@/config/axios/config"
 
 interface Props {
   onSuccess: () => void
