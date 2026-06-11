@@ -11,7 +11,13 @@ const getModuleById: IModulesRepository["getModuleById"] = async (id) => {
   return response.data
 }
 
+const uploadModule: IModulesRepository["uploadModule"] = async (data) => {
+  const response = await axiosInstance.post("/modules", data)
+  return response.data
+}
+
 export const modulesRepository: IModulesRepository = {
   getModules,
   getModuleById,
+  uploadModule
 }

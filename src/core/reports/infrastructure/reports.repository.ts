@@ -11,7 +11,13 @@ const getReportById: IReportsRepository["getReportById"] = async (id) => {
   return response.data
 }
 
+const uploadReport: IReportsRepository["uploadReport"] = async (data) => {
+  const response = await axiosInstance.post("/reports", data)
+  return response.data
+}
+
 export const reportsRepository: IReportsRepository = {
   getReports,
   getReportById,
+  uploadReport
 }

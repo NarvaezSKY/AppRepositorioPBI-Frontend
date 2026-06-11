@@ -1,10 +1,12 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link, Navigate, useParams } from "react-router-dom"
 import { Card } from "@heroui/react"
-import { ArrowUpRight, ExternalLink, FileBarChart } from "lucide-react"
+import { ArrowUpRight, ExternalLink, FileBarChart, Plus } from "lucide-react"
 import { Breadcrumbs } from "../components/breadcrumbs"
 import { getModuleIcon } from "@/presentation/icons/module-icons"
 import { useCatalogStore } from "@/store/catalog-store"
+import { UploadModal } from "@/components/upload-modal"
+import { UploadReportForm } from "@/components/upload-report-form"
 
 export function ReportsPage() {
   const { moduleId } = useParams<{ moduleId: string }>()
@@ -17,6 +19,8 @@ export function ReportsPage() {
   const error = useCatalogStore((state) => state.error)
   const loadModules = useCatalogStore((state) => state.loadModules)
   const loadReportsByModule = useCatalogStore((state) => state.loadReportsByModule)
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     if (!modulesLoaded) {
@@ -47,17 +51,36 @@ export function ReportsPage() {
     <div>
       <Breadcrumbs items={[{ label: "Módulos", to: "/modulos" }, { label: mod.title }]} />
 
-      <header className="mb-8 flex items-start gap-4">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--sena-green)]/12 text-[var(--sena-green)]">
-          <Icon className="h-6 w-6" />
-        </span>
-        <div>
-          <h1 className="text-balance text-3xl font-extrabold tracking-tight">
-            {mod.title}
-          </h1>
-          <p className="mt-2 max-w-2xl text-pretty text-muted">{mod.description}</p>
+      <header className="mb-8 flex items-start justify-between gap-4">
+        <div className="flex items-start gap-4">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--sena-green)]/12 text-[var(--sena-green)]">
+            <Icon className="h-6 w-6" />
+          </span>
+          <div>
+            <h1 className="text-balance text-3xl font-extrabold tracking-tight">
+              {mod.title}
+            </h1>
+            <p className="mt-2 max-w-2xl text-pretty text-muted">{mod.description}</p>
+          </div>
         </div>
+
+        <button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[var(--sena-green)] px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+        >
+          <Plus className="h-4 w-4" />
+          Nuevo reporte
+        </button>
       </header>
+
+      <UploadModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Subir reporte"
+      >
+        <UploadReportForm moduleId={mod.id} onSuccess={() => setModalOpen(false)} />
+      </UploadModal>
 
       {error && (
         <p className="mb-4 rounded-lg bg-[var(--danger)]/10 px-3 py-2 text-sm text-[var(--danger)]">

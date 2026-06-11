@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@heroui/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { useAuth } from "../context/auth-context";
 import { getModuleIcon } from "@/presentation/icons/module-icons";
 import { useCatalogStore } from "@/store/catalog-store";
+import { UploadModal } from "@/components/upload-modal";
+import { UploadModuleForm } from "@/components/upload-module-form";
 
 export function ModulesPage() {
   const { user } = useAuth();
@@ -14,6 +16,8 @@ export function ModulesPage() {
   const error = useCatalogStore((state) => state.error);
   const loadModules = useCatalogStore((state) => state.loadModules);
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   useEffect(() => {
     if (!modulesLoaded) {
       void loadModules();
@@ -22,17 +26,37 @@ export function ModulesPage() {
 
   return (
     <div>
-      <header className="mb-8">
-        <p className="text-sm font-medium text-[var(--sena-green)]">
-          Hola, {user?.username?.split(" ")[0]}
-        </p>
-        <h1 className="mt-1 text-balance text-3xl font-extrabold tracking-tight">
-          Módulos de gestión
-        </h1>
-        <p className="mt-2 max-w-2xl text-pretty text-muted">
-          Selecciona un módulo para ver los reportes de Power BI disponibles.
-        </p>
+      <header className="mb-8 flex w-full px-4 py-3 sm:px-6">
+        <div className="mb-2 grid-cols-1 gap-4 md:grid-cols-2 justify-between w-full">
+          <p className="text-sm font-medium text-[var(--sena-green)]">
+            Hola, {user?.username?.split(" ")[0]}
+          </p>
+          <h1 className="mt-1 text-balance text-3xl font-extrabold tracking-tight">
+            Módulos de gestión
+          </h1>
+          <p className="mt-2 max-w-2xl text-pretty text-muted">
+            Selecciona un módulo para ver los reportes de Power BI disponibles.</p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--sena-green)] px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          >
+            <Plus className="h-4 w-4" />
+            Nuevo módulo
+          </button>
+        </div>
       </header>
+
+      <UploadModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Crear nuevo módulo"
+      >
+        <UploadModuleForm onSuccess={() => setModalOpen(false)} />
+      </UploadModal>
 
       {error && (
         <p className="mb-4 rounded-lg bg-[var(--danger)]/10 px-3 py-2 text-sm text-danger">

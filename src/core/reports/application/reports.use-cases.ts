@@ -7,3 +7,8 @@ export const getReportsUseCase = (repository: IReportsRepository) => {
 export const getReportByIdUseCase = (repository: IReportsRepository) => {
   return repository.getReportById
 }
+
+
+export const uploadReportUseCase = (repository: IReportsRepository) => {
+  return repository.uploadReport
+}

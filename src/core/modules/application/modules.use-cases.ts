@@ -7,3 +7,7 @@ export const getModulesUseCase = (repository: IModulesRepository) => {
 export const getModuleByIdUseCase = (repository: IModulesRepository) => {
   return repository.getModuleById
 }
+
+export const uploadModuleUseCase = (repository: IModulesRepository) => {
+  return repository.uploadModule
+}
