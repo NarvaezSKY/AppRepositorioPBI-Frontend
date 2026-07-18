@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Navigate, useParams } from "react-router-dom"
+import { Navigate, useParams, useNavigate } from "react-router-dom"
 import { Button } from "@heroui/react"
 import { ExternalLink, Loader2, Maximize2, RefreshCw } from "lucide-react"
 import { Breadcrumbs } from "../components/breadcrumbs"
@@ -11,6 +11,7 @@ export function ReportViewerPage() {
     reportId: string
   }>()
 
+  const navigate = useNavigate()
   const modules = useCatalogStore((state) => state.modules)
   const modulesLoaded = useCatalogStore((state) => state.modulesLoaded)
   const reportById = useCatalogStore((state) => state.reportById)
@@ -31,6 +32,14 @@ export function ReportViewerPage() {
       void loadReportById(reportId)
     }
   }, [loadReportById, reportId])
+
+  useEffect(() => {
+    const report = reportId ? reportById[reportId] : undefined
+    if (report?.directNavigate && moduleId) {
+      window.open(report.url, "_blank", "noopener,noreferrer")
+      navigate(`/modulos/${moduleId}`, { replace: true })
+    }
+  }, [reportById, reportId, moduleId, navigate])
 
   const mod = moduleId ? modules.find((item) => item.id === moduleId) : undefined
   const report = reportId ? reportById[reportId] : undefined

@@ -92,12 +92,8 @@ export function ReportsPage() {
         <p className="text-sm text-muted">Cargando reportes...</p>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {moduleReports.map((report) => (
-            <Link
-              key={report.id}
-              to={`/modulos/${mod.id}/reportes/${report.id}`}
-              className="group rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--sena-green)]"
-            >
+          {moduleReports.map((report) => {
+            const cardContent = (
               <Card className="h-full border border-border transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[var(--sena-green)]/50 group-hover:shadow-lg">
                 <Card.Content className="flex h-full items-start gap-4 p-5">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-secondary text-[var(--sena-green)]">
@@ -120,8 +116,32 @@ export function ReportsPage() {
                   </div>
                 </Card.Content>
               </Card>
-            </Link>
-          ))}
+            )
+
+            if (report.directNavigate) {
+              return (
+                <a
+                  key={report.id}
+                  href={report.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--sena-green)]"
+                >
+                  {cardContent}
+                </a>
+              )
+            }
+
+            return (
+              <Link
+                key={report.id}
+                to={`/modulos/${mod.id}/reportes/${report.id}`}
+                className="group rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--sena-green)]"
+              >
+                {cardContent}
+              </Link>
+            )
+          })}
         </div>
       )}
     </div>

@@ -5,6 +5,7 @@ export interface IReport {
   name: string
   description: string
   url: string
+  directnavigate?: boolean
   /** Puede llegar como ObjectId string o como objeto poblado */
   module: string | IModule
   createdAt?: string

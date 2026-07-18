@@ -32,6 +32,7 @@ export interface Report {
   title: string
   description: string
   url: string
+  directNavigate: boolean
 }
 
 // ── Mappers ─────────────────────────────────────────────────────────────────
@@ -56,6 +57,7 @@ function toReport(dto: IReport): Report {
     title: dto.name,
     description: dto.description,
     url: dto.url,
+    directNavigate: dto.directnavigate ?? false,
   }
 }
 

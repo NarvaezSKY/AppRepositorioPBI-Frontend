@@ -4,4 +4,5 @@ export interface IPostReportReq {
     description: string
     url: string
     module: string
+    directnavigate?: boolean
 }

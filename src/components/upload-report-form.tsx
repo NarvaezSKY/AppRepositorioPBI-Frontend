@@ -96,6 +96,19 @@ export function UploadReportForm({ moduleId, onSuccess }: Props) {
         )}
       </div>
 
+      {/* Direct navigate */}
+      <div className="flex items-center gap-3">
+        <input
+          id="rep-direct"
+          type="checkbox"
+          className="h-4 w-4 rounded border-border accent-[var(--sena-green)]"
+          {...register("directnavigate")}
+        />
+        <label className="text-sm text-foreground" htmlFor="rep-direct">
+          Navegación directa — al hacer clic abre el enlace en una nueva pestaña en lugar de incrustarlo
+        </label>
+      </div>
+
       {/* Store-level error */}
       {storeError && (
         <p className="rounded-lg bg-[var(--danger)]/10 px-3 py-2 text-sm text-[var(--danger)]">

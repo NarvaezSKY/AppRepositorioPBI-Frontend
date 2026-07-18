@@ -3,6 +3,7 @@ export interface IPostReportRes {
     name: string;
     description: string;
     url: string;
+    directnavigate?: boolean;
     module: string;
     createdAt?: string;
     updatedAt?: string;
